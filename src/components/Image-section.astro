@@ -1,0 +1,25 @@
+---
+const { landscape, portrait } = Astro.props
+---
+
+<section class="section section--image">
+  <img
+    src={`${landscape} 768w`}
+    srcset={`${portrait} 515w, ${landscape} 768w`}
+    sizes="(min-width: 768px) 515px, 768px"
+    alt="image alt text"
+  />
+</section>
+
+<style lang="scss">
+  .section--image {
+    & > img {
+      width: 100%;
+      padding: 2vh 0;
+
+      @includes media(desktop) {
+        width: auto;
+      }
+    }
+  }
+</style>

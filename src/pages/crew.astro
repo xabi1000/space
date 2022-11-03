@@ -1,0 +1,50 @@
+---
+import data from '../data/data.json'
+import NavBar from '../components/NavBar.astro'
+import '../scss/pages/_crew.scss'
+
+const { crew } = data
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Traveling to the visitor space is already a reality" />
+    <title>CREW</title>
+  </head>
+  <body>
+    <NavBar />
+
+    <h2 class="subtitle"><span>02&nbsp;&nbsp;</span>MEET YOUR CREW</h2>
+    {
+      crew.map(({ name, images, bio: description, role }, index) => (
+        <article id={role} class="container crew">
+          <section class="info">
+            <nav class="info--slider">
+              <ul class="menu">
+                {crew.map(({ role }) => (
+                  <a href={`#${role}`} class="menu--link">
+                    <li class="menu--item" />
+                  </a>
+                ))}
+              </ul>
+            </nav>
+            <div class="info--describtion">
+              <h3 class="info--role">{role.toUpperCase()}</h3>
+              <h1 class="info--title">{name}</h1>
+              <p class="info--text">{description}</p>
+            </div>
+          </section>
+
+          <section class="illustration">
+            <img class="illustration--image" src={images.webp} alt={`image ilustration Mr. ${name}`} />
+          </section>
+        </article>
+      ))
+    }
+  </body>
+</html>

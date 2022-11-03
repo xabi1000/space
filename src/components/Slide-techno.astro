@@ -1,0 +1,57 @@
+---
+const articleLength = ['1', '2', '3']
+---
+
+<ul class="slider">
+  {
+    articleLength.map(ele => (
+      <a href={`#${ele}`} class="slider--link">
+        <li class="slider--item">{ele}</li>
+      </a>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  @use '../scss/base' as *;
+  @use '../scss/mixins' as *;
+
+  .slider {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    padding: 1.5rem 0;
+
+    @include media(tablet) {
+      padding: 2.5rem 0;
+    }
+
+    @include media(desktop) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    &--item {
+      width: clamp(40px, 40px + 3vw, 80px);
+      height: clamp(40px, 40px + 3vw, 80px);
+      display: grid;
+      place-items: center;
+      font-family: Bellefair;
+    }
+
+    &--link {
+      color: $white;
+      font-size: clamp(1.7rem, 1.3rem + 2vw, 2.3rem);
+      font-weight: 700;
+      border-radius: 50%;
+      outline: 1px solid $white;
+
+      &:hover {
+        color: $black;
+        background-color: $white;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,206 @@
+@use '../base' as *;
+@use '../mixins' as *;
+
+.subtitle {
+  position: fixed;
+  inset: 9vh auto auto auto;
+  width: 100vw;
+  height: fit-content;
+  font-family: BarlowCondensed;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 34px;
+  letter-spacing: 2.7px;
+  text-align: center;
+
+  @include media(tablet) {
+    inset: 13vh auto auto auto;
+    text-align: start;
+    padding-left: 3rem;
+  }
+
+  @include media(desktop) {
+    inset: 19vh auto auto 5rem;
+    font-size: 29px;
+    letter-spacing: 3px;
+    width: fit-content;
+    padding-left: 0;
+  }
+
+  & span {
+    opacity: 0.25;
+  }
+}
+
+.container {
+  @include flex(column-reverse, space-around, center);
+  width: 100vw;
+  height: 100vh;
+  padding-top: $NavBarHeigth;
+  scroll-behavior: smooth;
+  @include media(tablet) {
+    @include flex(column-reverse, space-around, center);
+  }
+  @include media(desktop) {
+    @include flex(row-reverse, space-around, center);
+  }
+}
+
+.info,
+.illustration {
+  @include media(tablet) {
+    width: 100%;
+    height: 50%;
+  }
+  @include media(desktop) {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.info {
+  @include flex(column, start, center, 2rem);
+  height: 55%;
+
+  @include media(tablet) {
+    gap: 1rem;
+    height: 50%;
+  }
+
+  @include media(desktop) {
+    @include flex(column, center, start, 0rem);
+    padding-left: 5rem;
+  }
+
+  &--slider {
+    width: 237px;
+    height: 28px;
+
+    @include media(tablet) {
+      width: 287px;
+      height: 35px;
+    }
+
+    & .menu {
+      @include flex(row, space-between, center, 1rem);
+
+      &--item {
+        &:hover > * {
+          color: $whiteSmoke;
+          border-bottom: 2px solid $whiteSmoke;
+          padding-bottom: 10px;
+        }
+      }
+    }
+  }
+
+  &--title {
+    font-family: Bellefair;
+    font-size: 56px;
+    text-align: center;
+    color: $white;
+    font-weight: 400;
+    @include media(tablet) {
+      font: size 151px;
+    }
+
+    @include media(tablet) {
+      font-size: 80px;
+    }
+    @include media(desktop) {
+      font-size: 100px;
+    }
+  }
+
+  &--text {
+    font-family: Barlow;
+    text-align: center;
+    font-size: 15px;
+    width: 327px;
+    line-height: 25px;
+    color: $whiteSmoke;
+
+    @include media(tablet) {
+      font-size: 17px;
+      width: 573px;
+      line-height: 29px;
+    }
+
+    @include media(desktop) {
+      font-size: 19px;
+      width: 445px;
+      line-height: 33px;
+      text-align: start;
+    }
+  }
+
+  &--detailed {
+    @include flex(row, center, center, 2rem);
+
+    @include media(tablet) {
+      @include flex(row, center, center, 7rem);
+      padding-top: 5rem;
+    }
+    @include media(desktop) {
+      @include flex(row, center, center, 7rem);
+    }
+
+    & .distance,
+    & .time {
+      @include flex(column, center, center, 1rem);
+
+      @include media(desktop) {
+        @include flex(column, center, start, 1rem);
+      }
+
+      & span {
+        font-family: BarlowCondensed;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 17px;
+        letter-spacing: 2.35px;
+        color: $whiteSmoke;
+      }
+
+      & p {
+        font-family: Bellefair;
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 32px;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.illustration {
+  @include flex(row, center, center);
+  height: 45%;
+
+  @include media(tablet) {
+    padding-top: 3rem;
+    height: 50%;
+  }
+
+  @include media(desktop) {
+    width: 50vw;
+    @include flex(row, start, center, 0);
+    padding-left: 5rem;
+  }
+
+  &--image {
+    width: auto;
+    height: 75%;
+
+    @include media(tablet) {
+      width: 301px;
+      height: auto;
+    }
+
+    @include media(desktop) {
+      width: 445px;
+      height: auto;
+    }
+  }
+}

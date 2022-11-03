@@ -1,0 +1,21 @@
+---
+import data from '../data/data.json'
+const technology = data.technology
+
+import Subtitle from '../components/Subtitle.astro'
+import ResponsiveLayout from '../layouts/Reponsive-layout.astro'
+import ImageSection from '../components/Image-section.astro'
+import DescribtionSection from '../components/Describtion-section.astro'
+---
+
+<ResponsiveLayout title="Technology" bgiClass="technology">
+  {
+    technology.map(({ pageNumber, pageTitle, name, images, description }, index) => (
+      <article class="technology" id={`${index + 1}`}>
+        <Subtitle pageNumber={pageNumber} pageTitle={pageTitle} />
+        <ImageSection landscape={images.landscape} portrait={images.portrait} />
+        <DescribtionSection name={name.toUpperCase()} description={description} />
+      </article>
+    ))
+  }
+</ResponsiveLayout>

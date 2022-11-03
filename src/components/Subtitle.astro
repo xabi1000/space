@@ -1,0 +1,37 @@
+---
+const { pageNumber, pageTitle } = Astro.props
+---
+
+<h3 class="subtitle"><span>{pageNumber}&nbsp;&nbsp;</span> {pageTitle}</h3>
+
+<style lang="scss">
+  @use '../scss/mixins' as *;
+
+  .subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3vh 0;
+    font-family: BarlowCondensed;
+    font-size: 19px;
+    font-weight: 400;
+    line-height: clamp(24px, 24px + 0.3vw, 34px);
+    letter-spacing: clamp(3.75px, 3.75px + 0.1vw, 4.75px);
+
+    @include media(tablet) {
+      justify-content: start;
+      padding: 3vh 0 3vh 3rem;
+    }
+
+    @include media(desktop) {
+      position: absolute;
+      inset: 15vh auto auto 3rem;
+      font-size: 29px;
+    }
+
+    & > span {
+      font-weight: 700;
+      color: hsla(0, 0%, 100%, 0.25);
+    }
+  }
+</style>

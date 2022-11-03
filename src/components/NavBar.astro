@@ -1,0 +1,226 @@
+---
+import data from '../data/data.json'
+const menuItem = Object.keys(data)
+---
+
+<header>
+  <div class="logo-container">
+    <img src="/assets/shared/logo.svg" alt="page logo" />
+  </div>
+  <div class="menu-icons">
+    <img class="open" src="/assets/shared/icon-hamburger.svg" alt="menu icon open" />
+    <img class="close scale" src="/assets/shared/icon-close.svg" alt="menu icon close" />
+  </div>
+  <nav class="nav">
+    <ul class="menu menu--active">
+      <li class="menu__item">
+        <a class="menu__link" data-name="/" href="/">
+          <span class="menu__link-num">00&nbsp;</span>
+          HOME
+        </a>
+      </li>
+      {
+        menuItem.map((item, index) => (
+          <li class="menu__item">
+            <a class="menu__link" data-name={item} href={item}>
+              <span class="menu__link-num">0{index + 1}</span>
+              {item.toUpperCase()}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<style lang="scss">
+  @use '../scss/mixins' as *;
+
+  $whiteSmoke: hsla(231, 79%, 90%, 1);
+  $white: hsla(0, 0%, 100%, 1);
+  $transparent: tarnsparent;
+
+  header {
+    font-family: BarlowCondensed;
+    position: fixed;
+    inset: 0;
+    height: 91px;
+    @include flex(row, space-between, center);
+
+    @include media(desktop) {
+      position: fixed;
+      width: 100%;
+      inset: 3vh auto;
+      z-index: 501;
+    }
+
+    .logo-container {
+      position: fixed;
+      inset: auto auto auto 3vw;
+    }
+
+    .menu-icons {
+      position: fixed;
+      inset: auto 2vw auto 84vw;
+      width: 30px;
+      height: 30px;
+      z-index: 100;
+      display: grid;
+      place-items: center;
+      transition: transform 1.3s linear;
+
+      @include media(tablet) {
+        display: none;
+      }
+
+      & > * {
+        position: absolute;
+      }
+
+      // JAVASCRIPT TOGGLE CLASS -MENU ICONS-
+      & .scale {
+        transform: scale(0);
+        transition: transform 1.3s linear;
+      }
+    }
+
+    .nav {
+      margin-left: auto;
+      height: 100%;
+      width: 60%;
+      position: relative;
+
+      @include media(tablet) {
+        background-color: hsla(231 77% 90% / 0.07);
+      }
+    }
+  }
+
+  .menu {
+    @include flex(column, start, start, 3rem);
+    backdrop-filter: blur(40.7742px);
+    background: rgba(255, 255, 255, 0.04);
+    position: fixed;
+    inset: 0 0 0 29%;
+    padding: 25vh 0 0 3rem;
+    transform: translateX(0);
+    transition: transform 1s ease-in-out;
+
+    &--active {
+      transform: translateX(100%);
+    }
+
+    @include media(tablet) {
+      @include flex(row, space-evenly, center);
+      transform: translateX(0);
+      backdrop-filter: blur(0px);
+      position: absolute;
+      inset: 0 0 0 0;
+      padding: 0;
+    }
+
+    @include media(tablet) {
+      backdrop-filter: blur(55px);
+    }
+  }
+
+  .menu__item {
+    line-height: 19px;
+    letter-spacing: 2.7px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+
+    @include media(tablet) {
+      height: 100%;
+      display: grid;
+      place-items: center;
+
+      &:hover > a {
+        opacity: 0.8;
+        border-bottom: 2px solid $whiteSmoke;
+        // padding-bottom: 10px;
+      }
+    }
+  }
+
+  .menu__link {
+    font-family: BarlowCondensed;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    letter-spacing: 2.7px;
+    color: $white;
+    border-bottom: 5px solid transparent;
+    border-top: 5px solid transparent;
+
+    @include flex(row, center, center, 0.5rem);
+
+    @include media(tablet) {
+      font-size: 14px;
+      line-height: 17px;
+      letter-spacing: 2.4px;
+      width: 100%;
+      height: 100%;
+    }
+    @include media(desktop) {
+      font-size: 16px;
+      line-height: 19px;
+      letter-spacing: 2.7px;
+    }
+
+    &-num {
+      color: $white;
+      font-weight: bolder;
+      line-height: 24px;
+      letter-spacing: 3.375px;
+
+      @include media(tablet) {
+        display: none;
+      }
+      @include media(desktop) {
+        display: inherit;
+      }
+    }
+  }
+  .underline {
+    border-bottom: 5px solid $whiteSmoke;
+    border-top: 5px solid $whiteSmoke;
+  }
+</style>
+
+<script>
+  // SELECTORS
+  const getAllSelector = ele => document.querySelectorAll(ele)
+  const getSel = ele => document.querySelector(ele)
+
+  // DOM ELEMENTS
+
+  const $menuBTN = getSel('.menu-icons')
+  const $menu = getSel('.menu')
+  const $alMenulLinks = [...getAllSelector('.menu__link')]
+  const $allMenuIcons = [...getAllSelector('.menu-icons > img')]
+  const subtitel = getSel('.subtitel')
+
+  const URL = window.location
+
+  const menuLinksString = $alMenulLinks.map(link => link.textContent.replace(/\d*\s/g, '').toLowerCase())
+
+  const toggleClassInAllElements = (arrayItems, className) => arrayItems.forEach(ELEMENT => ELEMENT.classList.toggle(className))
+
+  $menuBTN.addEventListener('click', e => {
+    $menu.classList.toggle('menu--active')
+    toggleClassInAllElements($allMenuIcons, 'scale')
+  })
+
+  document.addEventListener('DOMContentLoaded', e => {
+    const urlString = URL.toString()
+    $menu.children[0].classList.add('underline')
+
+    menuLinksString.forEach((linkNav, index) => {
+      if (urlString.includes(linkNav)) {
+        $menu.children[index].classList.add('underline')
+        $menu.children[0].classList.toggle('underline')
+      }
+    })
+  })
+</script>

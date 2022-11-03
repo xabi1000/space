@@ -1,0 +1,19 @@
+@use './mediaquery' as *;
+
+@mixin bg-image($className) {
+  .#{$className} {
+    @include media(mobile) {
+      background-image: url(/assets/#{$className}/mobile.jpg);
+    }
+    @include media(tablet) {
+      background-image: url(/assets/#{$className}/tablet.jpg);
+    }
+    @include media(desktop) {
+      background-image: url(/assets/#{$className}/desktop.jpg);
+    }
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  }
+}

@@ -1,0 +1,82 @@
+---
+import SliderTechno from '../components/Slide-techno.astro'
+const { name, description } = Astro.props
+---
+
+<section class="section section--describtion">
+  <SliderTechno hrefName={name} />
+  <div class="text-container">
+    <h5 class="terminology">THE TERMINOLOGY…</h5>
+    <h1 class="name">{name}</h1>
+    <p class="desrcribtion">{description}</p>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../scss/mixins' as *;
+
+  .section--describtion {
+    padding: 0 1.5em;
+
+    @include media(tablet) {
+      // padding: 0 9em;
+    }
+
+    @include media(desktop) {
+      padding: 0 3rem 0 5rem;
+      display: flex;
+      flex-direction: row;
+      gap: 3.5rem;
+    }
+  }
+
+  .text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 505px;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include media(desktop) {
+      align-items: flex-start;
+      gap: 1em;
+      max-width: 65%;
+    }
+    & > * {
+      font-family: Bellefair;
+      font-weight: 400;
+      letter-spacing: 0px;
+    }
+
+    & > h5 {
+      margin-bottom: 1em;
+      font-size: clamp(14px, 14px + 0.5vw, 17px);
+      line-height: 17px;
+
+      @include media(tablet) {
+        padding-bottom: 1.3em;
+      }
+    }
+    & > h1 {
+      margin: 0rem 0 1rem 0;
+      font-size: clamp(23px, 23px + 2vw, 57px);
+      line-height: 28px;
+
+      @include media(tablet) {
+        padding-bottom: 2vh;
+      }
+    }
+    & > p {
+      font-family: Barlow;
+      text-align: center;
+      font-size: clamp(15px, 15px + 0.5vw, 19px);
+      line-height: clamp(27px, 23px + 1vw, 47px);
+      color: whitesmoke;
+
+      @include media(desktop) {
+        text-align: start;
+      }
+    }
+  }
+</style>

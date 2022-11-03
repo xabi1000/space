@@ -1,0 +1,231 @@
+@use '../base' as *;
+@use '../mixins' as *;
+
+.subtitle {
+  position: fixed;
+  inset: 9vh auto auto auto;
+  width: 100vw;
+  height: fit-content;
+  font-family: BarlowCondensed;
+  font-weight: 400;
+  font-size: 19px;
+  letter-spacing: 2.7px;
+  text-align: center;
+
+  @include media(tablet) {
+    text-align: start;
+    padding-left: 3rem;
+  }
+
+  @include media(desktop) {
+    inset: 17vh auto auto 7rem;
+    font-size: 29px;
+    letter-spacing: 3px;
+    width: fit-content;
+    padding: 0;
+  }
+
+  & span {
+    opacity: 0.25;
+  }
+}
+
+.container {
+  @include flex(column-reverse, space-around, center);
+  width: 100vw;
+  height: 100vh;
+  padding-top: $NavBarHeigth;
+  scroll-behavior: smooth;
+
+  @include media(tablet) {
+    @include flex(column, space-around, center);
+  }
+  @include media(desktop) {
+    @include flex(row, space-around, center);
+  }
+}
+
+.info,
+.illustration {
+  width: 100%;
+  height: 50%;
+}
+
+.info {
+  @include flex(column, start, center, 1.5rem);
+  padding-top: 1.5rem;
+
+  @include media(tablet) {
+    @include flex(column-reverse, center, center, 1rem);
+  }
+  @include media(desktop) {
+    @include flex(column-reverse, center, start, 2rem);
+    padding-left: 7rem;
+    width: 55%;
+  }
+
+  &--describtion {
+    @include media(desktop) {
+      @include flex(column, start, start);
+    }
+
+    & > * {
+      text-align: center;
+      padding: 0 2em;
+
+      @include media(tablet) {
+        text-align: center;
+        padding: 0 2em;
+        margin-bottom: 2.1rem;
+      }
+
+      @include media(desktop) {
+        padding: 0;
+        margin: 0;
+      }
+    }
+  }
+  &--slider {
+    @include media(desktop) {
+      position: relative;
+      inset: auto auto -9vh auto;
+    }
+
+    & .menu {
+      @include flex(row, space-around, center);
+      width: 100%;
+
+      @include media(desktop) {
+        @include flex(row, space-around, center);
+      }
+
+      &--link {
+        @include flex(row, center, center);
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+
+        &:hover > * {
+          background-color: #fff;
+        }
+      }
+
+      &--item {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: hsla(0, 0%, 100%, 0.5);
+      }
+    }
+  }
+
+  &--role {
+    font-family: Bellefair;
+    font-size: 1.1em;
+    font-weight: 400;
+    letter-spacing: 0px;
+    color: hsla(0, 0%, 100%, 0.5);
+
+    @include media(tablet) {
+      font-size: 1.3em;
+    }
+    @include media(desktop) {
+      font-size: 1.7em;
+    }
+  }
+
+  &--title {
+    font-family: Bellefair;
+    font-size: 1.3em;
+    color: $white;
+    font-weight: 400;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 0.7rem 0 1.3rem 0;
+
+    @include media(tablet) {
+      font-size: 1.7em;
+    }
+    @include media(desktop) {
+      font-size: 3.1em;
+      margin: 1rem 0 2rem 0;
+    }
+  }
+
+  &--text {
+    font-family: Barlow;
+    text-align: center;
+    font-size: 1em;
+    line-height: 1.45;
+    color: $whiteSmoke;
+    max-width: 751px;
+
+    @include media(tablet) {
+      font-size: 1.5em;
+    }
+    @include media(desktop) {
+      text-align: start;
+      font-size: 19px;
+    }
+  }
+
+  &--detailed {
+    @include flex(column, center, center, 2rem);
+
+    @include media(tablet) {
+    }
+    @include media(desktop) {
+      @include flex(row, center, center, 4rem);
+    }
+
+    & .distance,
+    & .time {
+      @include flex(column, center, center, 1rem);
+
+      @include media(desktop) {
+        @include flex(column, center, start, 1rem);
+      }
+
+      & span {
+        font-family: BarlowCondensed;
+        font-size: 14px;
+        font-weight: 400;
+        letter-spacing: 2.35px;
+        color: $whiteSmoke;
+      }
+
+      & p {
+        font-family: Bellefair;
+        font-size: 28px;
+        font-weight: 400;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+
+.illustration {
+  @include flex(column, end, center);
+
+  @include media(desktop) {
+    @include flex(row, center, end, 0);
+    width: auto;
+    height: 100%;
+  }
+
+  &--image {
+    width: auto;
+    height: 39vh;
+
+    @include media(tablet) {
+      width: auto;
+      height: 49vh;
+    }
+
+    @include media(desktop) {
+      width: auto;
+      height: 75vh;
+    }
+  }
+}

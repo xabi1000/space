@@ -1,0 +1,60 @@
+---
+import data from '../data/data.json'
+import NavBar from '../components/NavBar.astro'
+import '../scss/pages/_destination.scss'
+
+const { destinations } = data
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Traveling to the visitor space is already a reality" />
+    <title>DESTINATION</title>
+  </head>
+  <body>
+    <NavBar />
+
+    <h2 class="subtitle"><span>01&nbsp;&nbsp;</span>PICK YOUR DESTINATION</h2>
+    {
+      destinations.map(({ name, images, description, distance, travel }, index) => (
+        <article id={name} class="container destination">
+          <section class="info">
+            <nav class="info--slider">
+              <ul class="menu">
+                {destinations.map(({ name }) => (
+                  <li class="menu--item">
+                    <a href={`#${name}`} class="menu--link">
+                      {name.toUpperCase()}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <h1 class="info--title">{name.toUpperCase()}</h1>
+            <p class="info--text">{description}</p>
+
+            <div class="info--detailed">
+              <div class="distance">
+                <span>AVG. DISTANCE</span>
+                <p>{distance}</p>
+              </div>
+              <div class="time">
+                <span>EST. TRAVEL TIME</span>
+                <p>{travel}</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="illustration">
+            <img class="illustration--image" src={images.webp} alt={`image ilustration ${name}`} />
+          </section>
+        </article>
+      ))
+    }
+  </body>
+</html>
